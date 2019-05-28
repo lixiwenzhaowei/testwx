@@ -94,5 +94,8 @@ public interface CommunityService {
     String qiniuUpload(MultipartFile file) throws WxException;
 
 
+
+
+
     Map<String, Object> deleteArticleAndCommentById(Integer id) throws WxException;
 }

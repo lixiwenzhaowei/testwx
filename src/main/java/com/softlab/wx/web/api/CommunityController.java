@@ -103,19 +103,22 @@ public class CommunityController {
      * @return
      */
     @RequestMapping(value = "/post", method = RequestMethod.POST)
-    public RestData insertCommunity (@RequestParam(value = "file",required = false) MultipartFile file, @RequestParam(value = "title") String title, @RequestParam(value = "oppidA") String oppidA, MultipartHttpServletRequest request, HttpServletResponse response) throws WxException {
-    logger.info(oppidA + title+"file="+file.getOriginalFilename());
-        //        logger.info(" insertCommunitypost: " + JsonUtil.getJsonString(community));
-//        String msg = communityService.qiniuUpload(file);
-//        community.setPic(msg);
-//        try{
-//            boolean flag = communityService.insertCommunity(community);
-//            return new RestData(flag);
-//
-//        } catch (WxException e){
-//            return new RestData(1, e.getMessage());
-//        }
-        return new RestData(0);
+    public RestData insertCommunity (@RequestParam(value = "file",required = false) MultipartFile file, @RequestParam(value = "title") String title, @RequestParam(value = "oppidA") String oppidA, @RequestParam("content") String content, @RequestParam(value = "category") String category, MultipartHttpServletRequest request, HttpServletResponse response) throws WxException {
+        logger.info("post" + oppidA + " " + title + " " + "file=" + file.getOriginalFilename() + category + "");
+        Community community = new Community();
+        community.setCategory(category);
+        community.setContent(content);
+        community.setOppidA(oppidA);
+        community.setTitle(title);
+        String msg = communityService.qiniuUpload(file);
+        community.setPic(msg);
+        try{
+            boolean flag = communityService.insertCommunity(community);
+            return new RestData(flag);
+
+        } catch (WxException e){
+            return new RestData(1, e.getMessage());
+        }
     }
 
     /**

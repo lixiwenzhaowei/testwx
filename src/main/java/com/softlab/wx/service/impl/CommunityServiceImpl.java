@@ -132,7 +132,6 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<Map<String, Object>> getCommunityByKeyword(String keyword) throws WxException{
         List<Map<String, Object>> al = new ArrayList<>();
-        Community community = new Community();
         List<Community> communityList = communityMapper.selectCommunityByKeyword(keyword);
         if (null != communityList){
             for (Community community1 : communityList){
@@ -171,8 +170,6 @@ public class CommunityServiceImpl implements CommunityService {
             community.setUserPaiwei(pace.getUserPaiwei());
             community.setUserImg(pace.getUserImg());
             community.setWriter(communityMapper.getUserName(oppidA));
-            community.setTitle(community.getTitle());
-            community.setContent(community.getContent());
             community.setLikesNumber(0);
             community.setCommentsNumber(0);
             community.setViewsNumber(0);
