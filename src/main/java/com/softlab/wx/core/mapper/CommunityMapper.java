@@ -134,7 +134,6 @@ public interface CommunityMapper {
     Pace getPaiweiAndPaiweiImg(@Param("oppidA") String oppidA);
 
 
-
     /**
      *
      * @param community
@@ -149,6 +148,13 @@ public interface CommunityMapper {
     @Update("update community_article set community_commentsNumber = #{commentsNumber} where community_systemId=#{systemId}")
     boolean updateCommentNumber(Community community);
 
+
+    /**
+     * 删除不合格的帖子
+     *
+     * @param id
+     * @return
+     */
     @Delete("delete from article where community_systemId=#{id}")
     int deleteArticleAndCommentById(Integer id);
 
